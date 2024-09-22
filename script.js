@@ -51,3 +51,8 @@ document.getElementById("get-maghrib").addEventListener("click", function() {
         alert("Geolocation is not supported by this browser.");
     }
 });
+
+document.getElementById("fajr-info").addEventListener("click", function() {
+    window.open("fajr-info.html", "_blank");
+});
+
