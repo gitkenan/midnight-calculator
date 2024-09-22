@@ -51,19 +51,3 @@ document.getElementById("get-maghrib").addEventListener("click", function() {
         alert("Geolocation is not supported by this browser.");
     }
 });
-
-document.getElementById("test-location").addEventListener("click", function() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                alert(`Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`);
-            },
-            function(error) {
-                alert("Error getting location: " + error.message);
-            }
-        );
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-});
-
