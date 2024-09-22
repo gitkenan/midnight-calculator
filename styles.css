@@ -1,7 +1,8 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #121212; /* Dark background */
-    color: #ffffff; /* Default text color */
+    background-color: #2e2e2e; /* Darker gray background */
+    color: #e0e0e0; /* Light gray text */
+/*    color: #ffffff; /* Default text color */
     margin: 0;
     padding: 0;
 }
@@ -20,7 +21,7 @@ h1 {
     text-align: center;
     font-family: 'Roboto', sans-serif; /* Modern, clean sans-serif font */
     font-size: 2.5em; /* Slightly smaller, still prominent */
-    color: #3498db; /* Bright blue color to complement the button */
+    color: #f0f0f0; /* Bright blue color to complement the button */
     letter-spacing: 1px; /* Slight spacing for a modern touch */
     margin-bottom: 20px; /* Space below the title */
     font-weight: 500; /* Medium weight for elegance */
