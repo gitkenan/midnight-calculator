@@ -16,7 +16,8 @@ document.getElementById("calculate").addEventListener("click", function() {
     }
 
     const midnight = new Date(maghribDate.getTime() + (fajrDate - maghribDate) / 2);
-    const lastThird = new Date(midnight.getTime() - (fajrDate - maghribDate) / 6);
+    const nightDuration = new Date(fajrDate.getTime() - maghribDate.getTime())
+    const lastThird = new Date(fajrDate.getTime() - (nightDuration / 3));
 
     const midnightTime = midnight.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const lastThirdTime = lastThird.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
