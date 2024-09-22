@@ -18,14 +18,15 @@ body {
 
 /* Style for the page title */
 h1 {
+    font-family: 'Roboto', sans-serif; /* Keep the current font */
+    font-size: 4em; /* Increase font size for more impact */
+    font-weight: 300; /* Bold for a stronger presence */
+    color: #e0e0e0; /* Light gray color to match the overall design */
+    letter-spacing: 1.5px; /* Slightly increased spacing for modern feel */
+    margin-bottom: 20px; /* Keep the margin below */
+    text-transform: uppercase; /* Make the title uppercase for a bold, modern look */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
     text-align: center;
-    font-family: 'Roboto', sans-serif; /* Modern, clean sans-serif font */
-    font-size: 2.5em; /* Slightly smaller, still prominent */
-    color: #f0f0f0; /* Bright blue color to complement the button */
-    letter-spacing: 1px; /* Slight spacing for a modern touch */
-    margin-bottom: 20px; /* Space below the title */
-    font-weight: 500; /* Medium weight for elegance */
-    text-transform: none; /* Keep the original case for a more natural look */
 }
 
 /* Add a subtle text shadow for depth */
@@ -58,6 +59,25 @@ button:hover {
 #fajr {
     margin-bottom: 40px; /* Adds more space below the Fajr input */
 }
+
+#dawud-prayer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#dawud-info {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+#dawud-schedule {
+    font-size: 1.1em;
+    color: #2c3e50;
+}
+
 
 input[type="time"] {
     border: 2px solid #007bff;

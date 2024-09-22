@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Midnight Calculator</title>
+    <title>Midnight</title>
 </head>
 <body>
+    <div class="title-section">
+        <h1>Midnight</h1>
+    </div>
     <div class="container">
-        <h1>Midnight Calculator</h1>
         <label for="maghrib">Maghrib is at:</label>
         <input type="time" id="maghrib" required>
         <label for="fajr">Fajr is at:</label>
@@ -20,6 +22,17 @@
     <div id="info">
         <p style="text-align: center; cursor: pointer; color: #007bff;" id="fajr-info">Why don't you get the Fajr time too?</p>
     </div>
+
+    <div id="dawud-prayer" style="margin-top: 30px;">
+        <p>
+            <a href="#" id="open-dawud-prayer">When did Prophet Dawud sleep and wake up for prayer?</a>
+        </p>
+        <div id="dawud-info" style="display: none;">
+            <h2>Dawud's Night Prayer</h2>
+            <p id="dawud-schedule"></p>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
