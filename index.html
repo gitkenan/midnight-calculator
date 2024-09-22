@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Islamic Midnight Calculator</title>
+    <title>Midnight Calculator</title>
 </head>
 <body>
     <div class="container">
         <h1>Islamic Midnight Calculator</h1>
-        <label for="maghrib">Maghrib Time:</label>
+        <label for="maghrib">Maghrib is at:</label>
         <input type="time" id="maghrib" required>
-        <label for="fajr">Fajr Time:</label>
+        <label for="fajr">Fajr is at:</label>
         <input type="time" id="fajr" required>
+        <button id="test-location">Test Location Fetch</button>
+        <button id="get-maghrib">Get Maghrib Time</button>
         <button id="calculate">Calculate</button>
         <div id="result"></div>
     </div>

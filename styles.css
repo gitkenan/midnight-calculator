@@ -30,7 +30,7 @@ label {
 
 input[type="time"] {
     width: 100%;
-    padding: 10px;
+    padding: 8px;
     margin-bottom: 20px;
     border: 1px solid #444; /* Darker border */
     border-radius: 5px;
@@ -39,18 +39,18 @@ input[type="time"] {
 }
 
 button {
-    width: 100%;
-    padding: 10px;
-    background-color: #00bcd4;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    width: 100%; /* Ensures the button is full width */
+    padding: 12px; /* Adjust padding for consistency */
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    font-size: 1em; /* Consistent font size */
 }
 
 button:hover {
-    background-color: #0097a7; /* Darker shade on hover */
+    background-color: #0056b3; /* Darker shade on hover */
 }
 
 #result {

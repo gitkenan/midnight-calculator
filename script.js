@@ -27,3 +27,43 @@ document.getElementById("calculate").addEventListener("click", function() {
     `;
 });
 
+document.getElementById("get-maghrib").addEventListener("click", function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            // Fetch prayer times using an API
+            fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=2`)
+                .then(response => response.json())
+                .then(data => {
+                    const maghrib = data.data.timings.Maghrib;
+                    document.getElementById("maghrib").value = maghrib; // Set the Maghrib time
+                })
+                .catch(error => {
+                    console.error("Error fetching prayer times:", error);
+                    alert("Could not fetch Maghrib time. Please enter it manually.");
+                });
+        }, function() {
+            alert("Geolocation access denied.");
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+});
+
+document.getElementById("test-location").addEventListener("click", function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                alert(`Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`);
+            },
+            function(error) {
+                alert("Error getting location: " + error.message);
+            }
+        );
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+});
+
