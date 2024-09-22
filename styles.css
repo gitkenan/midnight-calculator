@@ -15,11 +15,21 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
+/* Style for the page title */
 h1 {
     text-align: center;
-    color: #00bcd4; /* Bright accent color */
-    margin-bottom: 20px;
-    font-size: 2em; /* Larger title */
+    font-family: 'Roboto', sans-serif; /* Modern, clean sans-serif font */
+    font-size: 2.5em; /* Slightly smaller, still prominent */
+    color: #3498db; /* Bright blue color to complement the button */
+    letter-spacing: 1px; /* Slight spacing for a modern touch */
+    margin-bottom: 20px; /* Space below the title */
+    font-weight: 500; /* Medium weight for elegance */
+    text-transform: none; /* Keep the original case for a more natural look */
+}
+
+/* Add a subtle text shadow for depth */
+h1 {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 label {
@@ -38,9 +48,25 @@ button {
     box-sizing: border-box; /* Ensures the padding and border are included in the element's total width */
 }
 
+button:hover {
+    background: linear-gradient(135deg, #0056b3, #007bff);
+    transform: translateY(-2px);
+}
+
 /* Extra margin for Fajr input box to add space between Fajr and the Calculate button */
 #fajr {
     margin-bottom: 40px; /* Adds more space below the Fajr input */
+}
+
+input[type="time"] {
+    border: 2px solid #007bff;
+    transition: border-color 0.3s ease;
+}
+
+input[type="time"]:focus {
+    border-color: #0056b3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 /* Additional styles for the button */
@@ -48,6 +74,9 @@ button {
     background-color: #007bff;
     color: white;
     border: none;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     font-size: 16px;
     margin-bottom: 20px; /* Additional margin to separate it from other buttons */
