@@ -28,25 +28,29 @@ label {
     color: #ccc; /* Slightly lighter label color */
 }
 
-input[type="time"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #444; /* Darker border */
-    border-radius: 5px;
-    background-color: #333;
-    color: #fff;
+input[type="time"],
+button {
+    width: 100%; /* Ensures they take up the full width of the container */
+    padding: 10px; /* Adds internal padding for a consistent look */
+    margin-bottom: 20px; /* Space below each input/button */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures the padding and border are included in the element's total width */
 }
 
+/* Extra margin for Fajr input box to add space between Fajr and the Calculate button */
+#fajr {
+    margin-bottom: 40px; /* Adds more space below the Fajr input */
+}
+
+/* Additional styles for the button */
 button {
-    width: 100%; /* Ensures the button is full width */
-    padding: 12px; /* Adjust padding for consistency */
-    background-color: #007bff; /* Button color */
-    color: white; /* Text color */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer on hover */
-    font-size: 1em; /* Consistent font size */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px; /* Additional margin to separate it from other buttons */
 }
 
 button:hover {
