@@ -28,47 +28,54 @@ document.getElementById("calculate").addEventListener("click", function() {
     `;
 });
 
+// Event listener for Dawud's Night Prayer section reveal
 document.getElementById("open-dawud-prayer").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent default link behavior
 
     const maghribTime = document.getElementById("maghrib").value;
     const fajrTime = document.getElementById("fajr").value;
 
+    // Check if Maghrib and Fajr times are provided
     if (!maghribTime || !fajrTime) {
         alert("Please enter both Maghrib and Fajr times.");
         return;
     }
 
+    // Parse Maghrib and Fajr times into Date objects
     const maghribDate = new Date(`1970-01-01T${maghribTime}:00`);
-    const fajrDate = new Date(`1970-01-02T${fajrTime}:00`); // Fajr is on the next day
+    const fajrDate = new Date(`1970-01-02T${fajrTime}:00`); // Fajr is the next day
 
-    const totalNightDuration = fajrDate - maghribDate; // Total duration between Maghrib and Fajr in milliseconds
+    // Total duration between Maghrib and Fajr in milliseconds
+    const totalNightDuration = fajrDate - maghribDate;
 
-    // Estimate Isha to be 1/3 of the night after Maghrib
-    const oneThirdNight = totalNightDuration / 3;
-    const ishaTime = new Date(maghribDate.getTime() + oneThirdNight);
+    // Isha is 1.25 hours (75 minutes) after Maghrib
+    const ishaDuration = 75 * 60 * 1000; // 1.25 hours in milliseconds
+    const ishaTime = new Date(maghribDate.getTime() + ishaDuration);
 
-    // Assume Dawud did other activities for 1 hour after Isha
-    const afterIshaActivityDuration = 60 * 60 * 1000; // 1 hour in milliseconds
-    const sleepStart = new Date(ishaTime.getTime() + afterIshaActivityDuration);
+    // Dawud goes to sleep between 1.5 to 3 hours after Isha
+    const minSleepDelay = 1.5 * 60 * 60 * 1000; // Minimum 1.5 hours in milliseconds
+    const maxSleepDelay = 3 * 60 * 60 * 1000; // Maximum 3 hours in milliseconds
 
-    // Now calculate the remaining time from sleepStart to Fajr
-    const remainingNight = fajrDate - sleepStart;
+    // Random sleep delay between 1.5 to 3 hours
+    const sleepDelay = Math.random() * (maxSleepDelay - minSleepDelay) + minSleepDelay;
+    const sleepStart = new Date(ishaTime.getTime() + sleepDelay); // Sleep starts after this delay
 
-    // Dawud's routine: half sleep, one-third prayer, and final one-sixth sleep
-    const halfSleepDuration = remainingNight / 2;
-    const oneThirdPrayerDuration = remainingNight / 3;
-    const oneSixthFinalSleepDuration = remainingNight / 6;
+    // Dawud's night routine: half sleep, one-third prayer, final one-sixth sleep (all based on the full night duration)
+    const halfNightDuration = totalNightDuration / 2;
+    const oneThirdNightDuration = totalNightDuration / 3;
+    const oneSixthNightDuration = totalNightDuration / 6;
 
-    const sleepEnd = new Date(sleepStart.getTime() + halfSleepDuration); // End of first sleep/start of prayer
-    const prayerEnd = new Date(sleepEnd.getTime() + oneThirdPrayerDuration); // End of prayer/start of final sleep
+    // Calculate the timings for sleep, prayer, and final sleep (fractions of the full night)
+    const sleepEnd = new Date(sleepStart.getTime() + halfNightDuration); // End of half-night sleep, start of prayer
+    const prayerEnd = new Date(sleepEnd.getTime() + oneThirdNightDuration); // End of prayer, start of final sleep
     const finalSleepEnd = fajrDate; // Final sleep ends at Fajr
 
-    // Display the schedule
+    // Display the Dawud's Night Prayer schedule
     document.getElementById("dawud-info").style.display = "block";
     document.getElementById("dawud-schedule").innerHTML = `
         <strong>Dawud's Night Prayer Approximation:</strong><br>
-        - Sleep start: ${sleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+        - Isha time: ${ishaTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+        - Sleep start (after Isha delay): ${sleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
         - Sleep end (start of prayer): ${sleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
         - Prayer end (resume sleep): ${prayerEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
         - Final sleep ends at Fajr: ${finalSleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
