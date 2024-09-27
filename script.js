@@ -1,132 +1,148 @@
-document.getElementById("calculate").addEventListener("click", function() {
-    const maghribTime = document.getElementById("maghrib").value;
-    const fajrTime = document.getElementById("fajr").value;
+document.getElementById("calculate").addEventListener("click", function () {
+  const maghribTime = document.getElementById("maghrib").value;
+  const fajrTime = document.getElementById("fajr").value;
 
-    if (!maghribTime || !fajrTime) {
-        alert("Please enter both Maghrib and Fajr times.");
-        return;
-    }
+  if (!maghribTime || !fajrTime) {
+    alert("Please enter both Maghrib and Fajr times.");
+    return;
+  }
 
-    const maghribDate = new Date(`1970-01-01T${maghribTime}:00`);
-    const fajrDate = new Date(`1970-01-01T${fajrTime}:00`);
+  const maghribDate = new Date(`1970-01-01T${maghribTime}:00`);
+  const fajrDate = new Date(`1970-01-01T${fajrTime}:00`);
 
-    // If Fajr is before Maghrib, it means Fajr is on the next day
-    if (fajrDate <= maghribDate) {
-        fajrDate.setDate(fajrDate.getDate() + 1);
-    }
+  // If Fajr is before Maghrib, it means Fajr is on the next day
+  if (fajrDate <= maghribDate) {
+    fajrDate.setDate(fajrDate.getDate() + 1);
+  }
 
-    const midnight = new Date(maghribDate.getTime() + (fajrDate - maghribDate) / 2);
-    const nightDuration = new Date(fajrDate.getTime() - maghribDate.getTime())
-    const lastThird = new Date(fajrDate.getTime() - (nightDuration / 3));
+  const midnight = new Date(maghribDate.getTime() + (fajrDate - maghribDate) / 2);
+  const nightDuration = new Date(fajrDate.getTime() - maghribDate.getTime())
+  const lastThird = new Date(fajrDate.getTime() - (nightDuration / 3));
 
-    const midnightTime = midnight.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const lastThirdTime = lastThird.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const midnightTime = midnight.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const lastThirdTime = lastThird.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-    document.getElementById("result").innerHTML = `
+  document.getElementById("result").innerHTML = `
         Islamic Midnight: ${midnightTime}<br>
         Last Third of the Night Begins: ${lastThirdTime}
     `;
 });
 
-document.getElementById("show-hadith").addEventListener("click", function(event) {
+document.getElementById("show-hadith").addEventListener("click", function (event) {
   event.preventDefault();
   const hadithSection = document.getElementById("hadith-section");
   if (hadithSection.classList.contains("collapse")) {
-      hadithSection.classList.remove("collapse");
-      hadithSection.classList.add("expand");
+    hadithSection.classList.remove("collapse");
+    hadithSection.classList.add("expand");
   } else {
-      hadithSection.classList.remove("expand");
-      hadithSection.classList.add("collapse");
+    hadithSection.classList.remove("expand");
+    hadithSection.classList.add("collapse");
   }
 });
 
 // Event listener for Dawud's Night Prayer section reveal
-document.getElementById("open-dawud-prayer").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent default link behavior
+document.getElementById("open-dawud-prayer").addEventListener("click", function (event) {
+  event.preventDefault(); // Prevent default link behavior
 
-    const maghribTime = document.getElementById("maghrib").value;
-    const fajrTime = document.getElementById("fajr").value;
+  const maghribTime = document.getElementById("maghrib").value;
+  const fajrTime = document.getElementById("fajr").value;
 
-    // Check if Maghrib and Fajr times are provided
-    if (!maghribTime || !fajrTime) {
-        alert("Please enter both Maghrib and Fajr times.");
-        return;
-    }
+  // Check if Maghrib and Fajr times are provided
+  if (!maghribTime || !fajrTime) {
+    alert("Please enter both Maghrib and Fajr times.");
+    return;
+  }
 
-    // Parse Maghrib and Fajr times into Date objects
-    const maghribDate = new Date(`1970-01-01T${maghribTime}:00`);
-    const fajrDate = new Date(`1970-01-02T${fajrTime}:00`); // Fajr is the next day
+  // Parse Maghrib and Fajr times into Date objects
+  const maghribDate = new Date(`1970-01-01T${maghribTime}:00`);
+  const fajrDate = new Date(`1970-01-02T${fajrTime}:00`); // Fajr is the next day
 
-    // Total duration between Maghrib and Fajr in milliseconds
-    const totalNightDuration = fajrDate - maghribDate;
+  // Total duration between Maghrib and Fajr in milliseconds
+  const totalNightDuration = fajrDate - maghribDate;
 
-    // Isha is 1.25 hours (75 minutes) after Maghrib
-    const ishaDuration = 75 * 60 * 1000; // 1.25 hours in milliseconds
-    const ishaTime = new Date(maghribDate.getTime() + ishaDuration);
+  // Isha is assumed to be 1.25 hours after Maghrib
+  const ishaDuration = 1.25 * 60 * 60 * 1000; // 1.25 hours in milliseconds
+  const ishaTime = new Date(maghribDate.getTime() + ishaDuration); // Isha time
 
-    // Dawud goes to sleep between 1.5 to 3 hours after Isha
-    const minSleepDelay = 1.5 * 60 * 60 * 1000; // Minimum 1.5 hours in milliseconds
-    const maxSleepDelay = 3 * 60 * 60 * 1000; // Maximum 3 hours in milliseconds
+  // Dawud's night routine: half sleep, one-third prayer, final one-sixth sleep
+  const halfNightDuration = totalNightDuration / 2;
+  const oneThirdNightDuration = totalNightDuration / 3;
+  const oneSixthNightDuration = totalNightDuration / 6;
 
-    // Random sleep delay between 1.5 to 3 hours
-    const sleepDelay = Math.random() * (maxSleepDelay - minSleepDelay) + minSleepDelay;
-    const sleepStart = new Date(ishaTime.getTime() + sleepDelay); // Sleep starts after this delay
+  // Convert night fractions to hours and minutes for logging
+  const msToHoursMinutes = (ms) => {
+    const hours = Math.floor(ms / (1000 * 60 * 60));
+    const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+    return { hours, minutes };
+  };
 
-    // Dawud's night routine: half sleep, one-third prayer, final one-sixth sleep (all based on the full night duration)
-    const halfNightDuration = totalNightDuration / 2;
-    const oneThirdNightDuration = totalNightDuration / 3;
-    const oneSixthNightDuration = totalNightDuration / 6;
+  const halfNight = msToHoursMinutes(halfNightDuration);
+  const oneThirdNight = msToHoursMinutes(oneThirdNightDuration);
+  const oneSixthNight = msToHoursMinutes(oneSixthNightDuration);
 
-    // Calculate the timings for sleep, prayer, and final sleep (fractions of the full night)
-    const sleepEnd = new Date(sleepStart.getTime() + halfNightDuration); // End of half-night sleep, start of prayer
-    const prayerEnd = new Date(sleepEnd.getTime() + oneThirdNightDuration); // End of prayer, start of final sleep
-    const finalSleepEnd = fajrDate; // Final sleep ends at Fajr
+  // Log the lengths of half, one-third, and one-sixth of the night
+  console.log(`Half of the night: ${halfNight.hours} hours and ${halfNight.minutes} minutes`);
+  console.log(`One-third of the night: ${oneThirdNight.hours} hours and ${oneThirdNight.minutes} minutes`);
+  console.log(`One-sixth of the night: ${oneSixthNight.hours} hours and ${oneSixthNight.minutes} minutes`);
 
-    // Display the Dawud's Night Prayer schedule
-    document.getElementById("dawud-info").style.display = "block";
-    document.getElementById("dawud-schedule").innerHTML = `
-        <strong>Dawud's Night Prayer Approximation:</strong><br>
-        - Isha time: ${ishaTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-        - Sleep start (after Isha delay): ${sleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-        - Sleep end (start of prayer): ${sleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-        - Prayer end (resume sleep): ${prayerEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-        - Final sleep ends at Fajr: ${finalSleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-    `;
+
+  // Final one-sixth sleep ends at Fajr
+  const finalSleepEnd = fajrDate; // Final sleep ends at Fajr
+  const finalSleepStart = new Date(finalSleepEnd.getTime() - oneSixthNightDuration); // Final sleep starts one-sixth before Fajr
+
+  // Half-night sleep starts after Isha
+  const sleepStart = new Date(ishaTime.getTime() + 1.5 * 60 * 60 * 1000); // Add 1.25hrs to isha time to allow time to settle into sleep after Isha
+  const sleepEnd = new Date(sleepStart.getTime() + halfNightDuration); // Half-night sleep
+
+  // After waking, one-third of the night is for prayer
+  const prayerEnd = new Date(sleepEnd.getTime() + oneThirdNightDuration - 1.5 * 60 * 60 * 1000); // One hour and a half for prayer as Maghrib and Isha were prayed in masjid
+
+  // Display Dawud's Night Prayer schedule
+  document.getElementById("dawud-info").style.display = "block";
+  document.getElementById("dawud-schedule").innerHTML = `
+      <strong>Dawud's Night Prayer Approximation:</strong><br>
+      - Isha time: ${ishaTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+      - Sleep start (after Isha): ${sleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+      - Sleep end (start of prayer): ${sleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+      - Prayer end (resume final sleep): ${prayerEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+      - Final sleep starts: ${finalSleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+      - Final sleep ends at Fajr: ${finalSleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+  `;
 });
 
 
-document.getElementById("get-maghrib").addEventListener("click", function() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
+document.getElementById("get-maghrib").addEventListener("click", function () {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
 
-            // Fetch prayer times using an API
-            fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=2`)
-                .then(response => response.json())
-                .then(data => {
-                    const maghrib = data.data.timings.Maghrib;
-                    document.getElementById("maghrib").value = maghrib; // Set the Maghrib time
-                })
-                .catch(error => {
-                    console.error("Error fetching prayer times:", error);
-                    alert("Could not fetch Maghrib time. Please enter it manually.");
-                });
-        }, function() {
-            alert("Geolocation access denied.");
+      // Fetch prayer times using an API
+      fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=2`)
+        .then(response => response.json())
+        .then(data => {
+          const maghrib = data.data.timings.Maghrib;
+          document.getElementById("maghrib").value = maghrib; // Set the Maghrib time
+        })
+        .catch(error => {
+          console.error("Error fetching prayer times:", error);
+          alert("Could not fetch Maghrib time. Please enter it manually.");
         });
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
+    }, function () {
+      alert("Geolocation access denied.");
+    });
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
 });
 
 // Event listener for Fajr explanation toggle
-document.getElementById("fajr-info").addEventListener("click", function() {
+document.getElementById("fajr-info").addEventListener("click", function () {
   const fajrInfoText = document.getElementById("fajr-info-text");
   if (fajrInfoText.style.display === "none" || fajrInfoText.style.display === "") {
-      fajrInfoText.style.display = "block"; // Show the Fajr explanation
+    fajrInfoText.style.display = "block"; // Show the Fajr explanation
   } else {
-      fajrInfoText.style.display = "none"; // Hide the Fajr explanation
+    fajrInfoText.style.display = "none"; // Hide the Fajr explanation
   }
 });
 
