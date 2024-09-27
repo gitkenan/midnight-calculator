@@ -28,17 +28,20 @@ document.getElementById("calculate").addEventListener("click", function () {
     `;
 });
 
-document.getElementById("show-hadith").addEventListener("click", function (event) {
-  event.preventDefault();
+// Add event listener for revealing the hadith section
+document.getElementById("show-hadith").addEventListener("click", function(event) {
+  event.preventDefault(); // Prevent default link behavior (jumping to the top)
+  
   const hadithSection = document.getElementById("hadith-section");
-  if (hadithSection.classList.contains("collapse")) {
-    hadithSection.classList.remove("collapse");
-    hadithSection.classList.add("expand");
+  
+  // Toggle the display of the hadith section
+  if (hadithSection.style.display === "none" || hadithSection.style.display === "") {
+      hadithSection.style.display = "block"; // Show the hadith
   } else {
-    hadithSection.classList.remove("expand");
-    hadithSection.classList.add("collapse");
+      hadithSection.style.display = "none"; // Hide the hadith
   }
 });
+
 
 // Event listener for Dawud's Night Prayer section reveal
 document.getElementById("open-dawud-prayer").addEventListener("click", function (event) {
@@ -111,39 +114,39 @@ document.getElementById("open-dawud-prayer").addEventListener("click", function 
 });
 
 
-document.getElementById("get-maghrib").addEventListener("click", function () {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
+// document.getElementById("get-maghrib").addEventListener("click", function () {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function (position) {
+//       const lat = position.coords.latitude;
+//       const lon = position.coords.longitude;
 
-      // Fetch prayer times using an API
-      fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=2`)
-        .then(response => response.json())
-        .then(data => {
-          const maghrib = data.data.timings.Maghrib;
-          document.getElementById("maghrib").value = maghrib; // Set the Maghrib time
-        })
-        .catch(error => {
-          console.error("Error fetching prayer times:", error);
-          alert("Could not fetch Maghrib time. Please enter it manually.");
-        });
-    }, function () {
-      alert("Geolocation access denied.");
-    });
-  } else {
-    alert("Geolocation is not supported by this browser.");
-  }
-});
+//       // Fetch prayer times using an API
+//       fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=2`)
+//         .then(response => response.json())
+//         .then(data => {
+//           const maghrib = data.data.timings.Maghrib;
+//           document.getElementById("maghrib").value = maghrib; // Set the Maghrib time
+//         })
+//         .catch(error => {
+//           console.error("Error fetching prayer times:", error);
+//           alert("Could not fetch Maghrib time. Please enter it manually.");
+//         });
+//     }, function () {
+//       alert("Geolocation access denied.");
+//     });
+//   } else {
+//     alert("Geolocation is not supported by this browser.");
+//   }
+// });
 
-// Event listener for Fajr explanation toggle
-document.getElementById("fajr-info").addEventListener("click", function () {
-  const fajrInfoText = document.getElementById("fajr-info-text");
-  if (fajrInfoText.style.display === "none" || fajrInfoText.style.display === "") {
-    fajrInfoText.style.display = "block"; // Show the Fajr explanation
-  } else {
-    fajrInfoText.style.display = "none"; // Hide the Fajr explanation
-  }
-});
+// // Event listener for Fajr explanation toggle
+// document.getElementById("fajr-info").addEventListener("click", function () {
+//   const fajrInfoText = document.getElementById("fajr-info-text");
+//   if (fajrInfoText.style.display === "none" || fajrInfoText.style.display === "") {
+//     fajrInfoText.style.display = "block"; // Show the Fajr explanation
+//   } else {
+//     fajrInfoText.style.display = "none"; // Hide the Fajr explanation
+//   }
+// });
 
 
