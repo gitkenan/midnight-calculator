@@ -28,6 +28,18 @@ document.getElementById("calculate").addEventListener("click", function() {
     `;
 });
 
+document.getElementById("show-hadith").addEventListener("click", function(event) {
+  event.preventDefault();
+  const hadithSection = document.getElementById("hadith-section");
+  if (hadithSection.classList.contains("collapse")) {
+      hadithSection.classList.remove("collapse");
+      hadithSection.classList.add("expand");
+  } else {
+      hadithSection.classList.remove("expand");
+      hadithSection.classList.add("collapse");
+  }
+});
+
 // Event listener for Dawud's Night Prayer section reveal
 document.getElementById("open-dawud-prayer").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent default link behavior
@@ -108,7 +120,14 @@ document.getElementById("get-maghrib").addEventListener("click", function() {
     }
 });
 
+// Event listener for Fajr explanation toggle
 document.getElementById("fajr-info").addEventListener("click", function() {
-    window.open("fajr-info.html", "_blank");
+  const fajrInfoText = document.getElementById("fajr-info-text");
+  if (fajrInfoText.style.display === "none" || fajrInfoText.style.display === "") {
+      fajrInfoText.style.display = "block"; // Show the Fajr explanation
+  } else {
+      fajrInfoText.style.display = "none"; // Hide the Fajr explanation
+  }
 });
+
 
