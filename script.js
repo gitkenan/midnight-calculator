@@ -100,16 +100,20 @@ document.getElementById("open-dawud-prayer").addEventListener("click", function 
   // After waking, one-third of the night is for prayer
   const prayerEnd = new Date(sleepEnd.getTime() + oneThirdNightDuration - 1.5 * 60 * 60 * 1000); // One hour and a half for prayer as Maghrib and Isha were prayed in masjid
 
+  function calculateDawudSecondSleep(maghribTimeStr, fajrTimeStr) {
+    const prayerEndTest = new Date(sleepEnd.getTime() + oneThirdNightDuration - 1.5 * 60 * 60 * 1000);
+    return prayerEndTest.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
   // Display Dawud's Night Prayer schedule
   document.getElementById("dawud-info").style.display = "block";
   document.getElementById("dawud-schedule").innerHTML = `
       <strong>Dawud's Night Prayer Approximation:</strong><br>
-      - Isha time: ${ishaTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - Sleep start (after Isha): ${sleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - Sleep end (start of prayer): ${sleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - Prayer end (resume final sleep): ${prayerEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - Final sleep starts: ${finalSleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - Final sleep ends at Fajr: ${finalSleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+      - If Isha is at: ${ishaTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+      - and sleeping begins at: ${sleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+      - then he'd wake up at: ${sleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+      - and go back to sleep at: ${prayerEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+      - or, if sleep is prioritised, then the final sleep starts at: ${finalSleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
+      - to wake up at Fajr: ${finalSleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
   `;
 });
 
@@ -149,4 +153,6 @@ document.getElementById("open-dawud-prayer").addEventListener("click", function 
 //   }
 // });
 
-
+if (typeof module !== 'undefined') {
+  module.exports = { calculateDawudSecondSleep };
+}
