@@ -1,12 +1,23 @@
+/* Mobile Styles (for screens below 600px) */
 @media (max-width: 600px) {
   .container {
-      padding: 15px;
-  }
-  button, input[type="time"] {
-      padding: 15px;
+      padding: 10px;
+      width: 90%; /* Ensure the container fits within mobile screens */
+      margin: 20px auto;
   }
   h1 {
-      font-size: 2em;
+      font-size: 1.8em; /* Adjust title size for smaller screens */
+  }
+  input[type="time"], button {
+      padding: 12px; /* Slightly larger padding for touch targets */
+      font-size: 1em; /* Reduce font size for readability on small screens */
+  }
+  button {
+      margin-bottom: 15px; /* Add space between buttons */
+  }
+  /* Adjust link sizes for mobile */
+  a {
+      font-size: 0.9em; /* Smaller font for links on mobile */
   }
 }
 
@@ -139,7 +150,6 @@ button:hover {
     color: #bdc3c7;
     font-size: 0.9em;
 }
-
 
 /* Links */
 a {
