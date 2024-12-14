@@ -1,8 +1,8 @@
 /* Mobile Styles (for screens below 600px) */
 @media (max-width: 600px) {
   .container {
-      padding: 10px;
-      width: 90%; /* Ensure the container fits within mobile screens */
+      width: 90%;
+      padding: 20px;
       margin: 20px auto;
   }
   h1 {
@@ -32,12 +32,29 @@ body {
 
 /* Container */
 .container {
-    max-width: 500px;
+    width: 300px;
     margin: 50px auto;
     padding: 30px;
     background-color: #3b3e44;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.form-group label {
+    font-size: 1em;
+    color: #cccccc;
+    width: 100%;
 }
 
 .collapse {
@@ -64,25 +81,26 @@ h1 {
 input[type="time"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #444;
     color: #fff;
     font-size: 1.1em;
+    box-sizing: border-box;
 }
 
 /* Buttons */
 button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
     background-color: #3498db;
     color: white;
     border: none;
     border-radius: 5px;
     font-size: 1.1em;
     cursor: pointer;
+    margin-top: 10px;
+    box-sizing: border-box;
 }
 
 button:hover {
@@ -91,6 +109,7 @@ button:hover {
 
 /* Result Section */
 #result {
+    width: 100%;
     margin-top: 20px;
     text-align: center;
     font-size: 1.3em;
@@ -165,4 +184,3 @@ a:hover {
 p, h2 {
     margin-bottom: 20px;
 }
-
