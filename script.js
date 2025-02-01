@@ -23,9 +23,14 @@ document.getElementById("calculate").addEventListener("click", function () {
   const lastThirdTime = lastThird.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   document.getElementById("result").innerHTML = `
-        Islamic Midnight: ${midnightTime}<br>
-        Last Third of the Night Begins: ${lastThirdTime}
-    `;
+    <div class="time-container">
+        <span class="time-label">Midnight</span>
+        <span class="time-value">${midnightTime}</span>
+    </div>
+    <div class="time-container">
+        <span class="time-label">Last Third</span>
+        <span class="time-value">${lastThirdTime}</span>
+    </div>`;
 });
 
 // Add event listener for revealing the hadith section
@@ -107,14 +112,22 @@ document.getElementById("open-dawud-prayer").addEventListener("click", function 
   // Display Dawud's Night Prayer schedule
   document.getElementById("dawud-info").style.display = "block";
   document.getElementById("dawud-schedule").innerHTML = `
-      <strong>Dawud's Night Prayer Approximation:</strong><br>
-      - If Isha is at: ${ishaTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - and sleeping begins at: ${sleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - then he'd wake up at: ${sleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - and go back to sleep at: ${prayerEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - or, if sleep is prioritised, then the final sleep starts at: ${finalSleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - to wake up at Fajr: ${finalSleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-  `;
+    <div class="schedule-entry">
+        <span class="time-label">Isha:</span>
+        <span class="time-value">${ishaTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+    </div>
+    <div class="schedule-entry">
+        <span class="time-label">First sleep:</span>
+        <span class="time-value">${sleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} – ${sleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+    </div>
+    <div class="schedule-entry">
+        <span class="time-label">Prayer time:</span>
+        <span class="time-value">Until ${prayerEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+    </div>
+    <div class="schedule-entry highlight">
+        <span class="time-label">Final sleep:</span>
+        <span class="time-value">${finalSleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} – ${finalSleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+    </div>`;
 });
 
 
