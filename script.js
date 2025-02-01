@@ -107,13 +107,30 @@ document.getElementById("open-dawud-prayer").addEventListener("click", function 
   // Display Dawud's Night Prayer schedule
   document.getElementById("dawud-info").style.display = "block";
   document.getElementById("dawud-schedule").innerHTML = `
-      <strong>Dawud's Night Prayer Approximation:</strong><br>
-      - If Isha is at: ${ishaTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - and sleeping begins at: ${sleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - then he'd wake up at: ${sleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - and go back to sleep at: ${prayerEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - or, if sleep is prioritised, then the final sleep starts at: ${finalSleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br>
-      - to wake up at Fajr: ${finalSleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+      <div class="timeline-entry">
+          <span class="timeline-label">Isha Prayer</span>
+          <span class="timeline-time">${ishaTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+      </div>
+      <div class="timeline-entry">
+          <span class="timeline-label">First Sleep Begins</span>
+          <span class="timeline-time highlight">${sleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+      </div>
+      <div class="timeline-entry">
+          <span class="timeline-label">Wake for Tahajjud</span>
+          <span class="timeline-time highlight">${sleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+      </div>
+      <div class="timeline-entry">
+          <span class="timeline-label">Second Sleep Begins</span>
+          <span class="timeline-time">${prayerEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+      </div>
+      <div class="timeline-entry">
+          <span class="timeline-label">Alternative Sleep Time</span>
+          <span class="timeline-time">${finalSleepStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+      </div>
+      <div class="timeline-entry">
+          <span class="timeline-label">Fajr Prayer</span>
+          <span class="timeline-time highlight">${finalSleepEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+      </div>
   `;
 });
 

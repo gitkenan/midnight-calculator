@@ -19,6 +19,7 @@
     /* Text Colors */
     --text-primary: #ffffff;
     --text-secondary: #94a3b8;
+    --text-highlight: #60a5fa;
     
     /* Border Colors */
     --border-color: #2d3748;
@@ -68,6 +69,15 @@ body {
     font-weight: 700;
     letter-spacing: -0.5px;
     color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.title-section .subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* Input Fields */
@@ -187,7 +197,7 @@ button:hover {
     margin: 20px auto;
     border-radius: 12px;
     max-width: 340px;
-    border-left: 3px solid var(--blue-primary);
+    text-align: left;
 }
 
 blockquote#hadith-text {
@@ -208,7 +218,46 @@ blockquote#hadith-text {
     font-style: normal;
 }
 
-/* Add these classes to your HTML elements */
+/* Timeline Layout */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.timeline-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.timeline-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.timeline-time {
+    font-family: 'Inter', monospace;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.timeline-time.highlight {
+    color: var(--text-highlight);
+    font-weight: 600;
+}
+
+/* Result Styling */
+#result {
+    line-height: 1.8;
+}
+
+#result strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
 .time-value {
     color: var(--blue-muted);
     font-family: 'Inter', monospace;
