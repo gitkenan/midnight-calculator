@@ -7,14 +7,17 @@
 /* Color System */
 :root {
     /* Background Colors */
-    --bg-primary: #0a0d14;
-    --bg-secondary: #151820;
+    --bg-primary: #0a0d14ee;
+    --bg-secondary: rgba(21, 24, 32, 0.65);
     --bg-tertiary: #1e1f25;
     
     /* Blue Palette */
     --blue-primary: #3b82f6;
     --blue-hover: #2563eb;
     --blue-muted: #60a5fa;
+    
+    /* Gradient */
+    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
     
     /* Text Colors */
     --text-primary: #ffffff;
@@ -38,7 +41,9 @@ body {
     width: 340px;
     margin: 50px auto;
     padding: 30px;
-    background-color: var(--bg-secondary);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-secondary);
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
@@ -67,7 +72,12 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     letter-spacing: -0.5px;
-    color: var(--text-primary);
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    animation: float 6s ease-in-out infinite;
 }
 
 /* Input Fields */
@@ -76,29 +86,38 @@ input[type="time"] {
     padding: 12px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    background-color: var(--bg-tertiary);
+    background: rgba(30, 31, 37, 0.4);
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input[type="time"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--blue-primary);
+    transform: scale(1.02);
 }
 
 /* Buttons */
 button {
     width: 100%;
     padding: 12px;
-    background-color: var(--blue-primary);
+    background: var(--gradient-primary);
     color: var(--text-primary);
     border: none;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
-    background-color: var(--blue-hover);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
 }
 
 /* Result Section */
@@ -227,10 +246,43 @@ a:hover {
 }
 
 /* Mobile Styles */
+@keyframes fadeInSlide {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+#dawud-info, #hadith-section {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+}
+
+.time-value {
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    background: linear-gradient(45deg, #fff 0%, var(--blue-muted) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 @media (max-width: 600px) {
     .container {
-        width: 90%;
         margin: 20px auto;
+        padding: 24px;
+        width: 88%;
+    }
+    
+    body {
+        padding: 0 16px;
+    }
+    
+    #dawud-info, #hadith-section {
+        padding: 20px;
     }
     
     .title-section h1 {

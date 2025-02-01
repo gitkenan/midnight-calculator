@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Midnight</title>
 </head>
 <body>
@@ -21,7 +22,16 @@
         </div>
         <button id="calculate">Calculate</button>
         <!-- <button id="get-maghrib">Get my local Maghrib time automatically!</button> -->
-        <div id="result"></div>
+        <div id="result" class="glass-panel">
+            <div class="result-line">
+                <i class="fas fa-moon"></i>
+                Islamic Midnight: <span class="time-value"></span>
+            </div>
+            <div class="result-line">
+                <i class="fas fa-star"></i>
+                Last Third Begins: <span class="time-value"></span>
+            </div>
+        </div>
     </div>
   
 
