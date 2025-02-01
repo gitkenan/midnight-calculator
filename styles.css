@@ -8,8 +8,8 @@
 :root {
     /* Background Colors */
     --bg-primary: #0a0d14;
-    --bg-secondary: #151820;
-    --bg-tertiary: #1e1f25;
+    --bg-secondary: rgba(21, 24, 32, 0.85);
+    --bg-tertiary: rgba(30, 31, 37, 0.75);
     
     /* Blue Palette */
     --blue-primary: #3b82f6;
@@ -21,7 +21,11 @@
     --text-secondary: #94a3b8;
     
     /* Border Colors */
-    --border-color: #2d3748;
+    --border-color: rgba(255, 255, 255, 0.08);
+    
+    /* Effects */
+    --glass-blur: blur(12px);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 /* General Styling */
@@ -64,41 +68,89 @@ body {
 
 .title-section h1 {
     font-family: 'Inter', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--text-primary);
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--blue-primary), var(--blue-muted));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.title-section .subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.glass-effect {
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
 }
 
 /* Input Fields */
 input[type="time"] {
     width: 100%;
-    padding: 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    padding: 14px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
     background-color: var(--bg-tertiary);
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+input[type="time"]:focus {
+    outline: none;
+    border-color: var(--blue-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 /* Buttons */
 button {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     background-color: var(--blue-primary);
     color: var(--text-primary);
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 button:hover {
     background-color: var(--blue-hover);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 80%
+    );
+    transform: translateX(-100%);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    100% { transform: translateX(100%); }
 }
 
 /* Result Section */
@@ -226,14 +278,33 @@ a:hover {
     color: var(--blue-primary);
 }
 
-/* Mobile Styles */
-@media (max-width: 600px) {
+/* Responsive Styles */
+@media (min-width: 768px) {
     .container {
-        width: 90%;
-        margin: 20px auto;
+        width: 480px;
+        margin: 40px auto;
+        padding: 40px;
     }
     
     .title-section h1 {
-        font-size: 2rem;
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 24px;
+    }
+    
+    .title-section h1 {
+        font-size: 2.5rem;
+    }
+    
+    input[type="time"],
+    button {
+        padding: 12px;
+        font-size: 1rem;
     }
 }
