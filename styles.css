@@ -163,31 +163,22 @@ button:hover {
     text-align: left;
 }
 
-/* Time entries styling */
-#dawud-schedule strong {
-    color: var(--text-primary);
-}
-
-/* Timeline-style layout for schedule */
+/* Enhanced schedule entry styling */
 .schedule-entry {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    margin-bottom: 12px;
-    padding-left: 24px;
+    padding: 12px;
+    margin: 8px 0;
+    background: var(--bg-secondary);
+    border-radius: 8px;
     position: relative;
 }
 
-.schedule-entry::before {
-    content: "";
-    position: absolute;
-    left: 8px;
-    top: 50%;
-    width: 4px;
-    height: 4px;
-    background-color: var(--blue-muted);
-    border-radius: 50%;
-    transform: translateY(-50%);
+.schedule-entry.highlight {
+    border: 1px solid var(--blue-primary);
+}
+
+.time-label {
+    font-weight: 500;
+    color: var(--text-primary);
 }
 
 /* Links Styling */
